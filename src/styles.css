@@ -10,13 +10,21 @@ html {
   font-family: 'Open Sans', sans-serif;
 }
 
+/* NAV */
+
+/* FILTERS */
+
 /* CARD */
 
 .card {
   border-radius: 4px;
   margin: 2.4rem;
   padding: 2.4rem;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.article-title-box {
+  margin-bottom: 0.8rem;
 }
 
 .article-title {
@@ -29,9 +37,13 @@ html {
 }
 
 .card-badge {
-  padding: 0.4rem 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 1.2rem;
   border-radius: 5px;
   font-size: 1.2rem;
-  background-color: orangered;
+  background-color: lightcoral;
   color: white;
 }
