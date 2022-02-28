@@ -1,0 +1,7 @@
+/* 992px / 16px = 62 */
+@media (max-width: 62em) {
+  .cards-list {
+    grid-template-columns: 1fr;
+    background-color: red;
+  }
+}

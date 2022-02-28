@@ -27,8 +27,16 @@ function App() {
 
   return (
     <div>
-      <h1 id='headline'>HackerNews</h1>
-      <CardList articles={articles} />
+      <section id="headline">
+        <h1>
+          Hacker
+          <i class="fa-solid fa-user-secret fa-xs"></i>News
+        </h1>
+        <h2>Your one stop shop for only the hackiest hacker news</h2>
+      </section>
+      <section className="container-list">
+        <CardList articles={articles} />
+      </section>
     </div>
   );
 }
