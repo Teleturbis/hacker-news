@@ -1,19 +1,34 @@
+import { useEffect, useState } from 'react';
+import Article from './Article';
+import CardList from './components/CardList.jsx';
+import FilterSection from './components/FilterSection.jsx';
+
 function App() {
+  const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    const url = './data.json';
+
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((u) => {
+        populate(u);
+      });
+  }, []);
+
+  const populate = (u) => {
+    u.hits.forEach((hit) => {
+      const article = new Article(hit);
+      setArticles((prevArticles) => [...prevArticles, article]);
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>HackerNews</h1>
+      <CardList articles={articles} />
     </div>
   );
 }
