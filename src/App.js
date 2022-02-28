@@ -18,6 +18,26 @@ function App() {
       });
   }, []);
 
+  function sortAscendingArticles(){
+
+    let tempArticles = [...articles];
+
+    tempArticles = tempArticles.sort(function(b, a){return a.points - b.points});
+
+    setArticles(tempArticles);
+
+  }
+
+  function sortDescendingArticles(){
+
+    let tempArticles = [...articles];
+
+    tempArticles = tempArticles.sort(function(a, b){return a.points - b.points});
+
+    setArticles(tempArticles);
+
+  }
+
   const populate = (u) => {
     u.hits.forEach((hit) => {
       const article = new Article(hit);
@@ -28,6 +48,7 @@ function App() {
   return (
     <div>
       <h1 id='headline'>HackerNews</h1>
+      <FilterSection articles={articles} sortAscendingArticles={sortAscendingArticles} sortDescendingArticles={sortDescendingArticles}/>
       <CardList articles={articles} />
     </div>
   );

@@ -16,11 +16,11 @@ export default function CardItem({ article }) {
 
       <ul className="card-badges">
         <li className="card-badge">
-          <i class="fa-solid fa-thumbs-up"></i>
+          <i className="fa-solid fa-thumbs-up"></i>
           <span>{article.points}</span>
         </li>
         <li className="card-badge">
-          <i class="fa-solid fa-user"></i>
+          <i className="fa-solid fa-user"></i>
           <span>{article.author}</span>
         </li>
         {/* <li className="card-badge">Created at: {article.date}</li> */}
@@ -29,7 +29,7 @@ export default function CardItem({ article }) {
           <span>{article.commentCount}</span>
         </li>
         <li className="card-badge">
-          <i class="fa-solid fa-calendar-day"></i>
+          <i className="fa-solid fa-calendar-day"></i>
           <span>{article.age}</span>
         </li>
       </ul>
