@@ -72,6 +72,9 @@ a {
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
   padding: 2rem 3.2rem;
   border: 1px solid var(--light);
   border-radius: 6px;
