@@ -14,13 +14,25 @@ export default function CardItem({ article }) {
       </div>
       {/* <p className="articleDescription"></p> */}
 
-      <div className="card-badges">
-        <p className="card-badge">Points: {article.points}</p>
-        <p className="card-badge">Author: {article.author}</p>
-        <p className="card-badge">Created at: {article.date}</p>
-        <p className="card-badge">Comments: {article.commentCount}</p>
-        <p className="card-badge">Posted: {article.age}</p>
-      </div>
+      <ul className="card-badges">
+        <li className="card-badge">
+          <i class="fa-solid fa-thumbs-up"></i>
+          <span>{article.points}</span>
+        </li>
+        <li className="card-badge">
+          <i class="fa-solid fa-user"></i>
+          <span>{article.author}</span>
+        </li>
+        {/* <li className="card-badge">Created at: {article.date}</li> */}
+        <li className="card-badge">
+          <i className="fa-solid fa-message"></i>
+          <span>{article.commentCount}</span>
+        </li>
+        <li className="card-badge">
+          <i class="fa-solid fa-calendar-day"></i>
+          <span>{article.age}</span>
+        </li>
+      </ul>
     </li>
   );
 }
