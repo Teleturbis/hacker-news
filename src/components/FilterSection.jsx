@@ -18,4 +18,6 @@ export default function Filter ({sortAscendingArticles, sortDescendingArticles})
     -hot
     -comments
 
+    -searchbar
+
 */
