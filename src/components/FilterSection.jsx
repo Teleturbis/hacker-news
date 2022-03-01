@@ -17,7 +17,7 @@ export default function Filter({
     <div>
       <input
         type="text"
-        value={userInput.searchBar}
+        value={userInput}
         placeholder="Suchen"
         onChange={(e) => setUserInput(e.target.value)}
       />
