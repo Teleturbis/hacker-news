@@ -7,15 +7,9 @@ function App() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    const url = 'http://hn.algolia.com/api/v1/search?page=1';
+    const url = "http://hn.algolia.com/api/v1/search?page=1";
 
-    fetch(url)
-      .then((response) => {
-        return response.json();
-      })
-      .then((u) => {
-        populate(u);
-      });
+    fetchData(url);
   }, []);
 
   function sortAscendingArticles() {
@@ -39,13 +33,33 @@ function App() {
   }
 
   const populate = (u) => {
+    let a = [];
+
     u.hits.forEach((hit) => {
       if (!hit.title) return;
 
       const article = new Article(hit);
-      setArticles((prevArticles) => [...prevArticles, article]);
+
+      a.push(article);
     });
+    setArticles(a);
   };
+
+  function searchForPost(searchText) {
+    const url = `http://hn.algolia.com/api/v1/search?query=${searchText}`;
+
+    fetchData(url);
+  }
+
+  function fetchData(url) {
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((jsonResponse) => {
+        populate(jsonResponse);
+      });
+  }
 
   return (
     <div>
@@ -57,6 +71,11 @@ function App() {
         <h2>Your one stop shop for only the hackiest hacker news</h2>
       </section>
       <section className="container-list">
+        <FilterSection
+          sortDescendingArticles={sortDescendingArticles}
+          sortAscendingArticles={sortAscendingArticles}
+          searchForPost={searchForPost}
+        />
         <CardList articles={articles} />
       </section>
     </div>
