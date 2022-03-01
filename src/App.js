@@ -58,7 +58,8 @@ function App() {
       })
       .then((jsonResponse) => {
         populate(jsonResponse);
-      });
+      })
+      .catch((err) => console.error(err));
   }
 
   return (

@@ -35,6 +35,6 @@ export default function Filter({
     -hot
     -comments
 
-    -searchbar
+    -searchbar      CHECKED
 
 */
