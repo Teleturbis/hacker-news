@@ -27,7 +27,7 @@ function App() {
 
   return (
     <div>
-      <h1>HackerNews</h1>
+      <h1 id='headline'>HackerNews</h1>
       <CardList articles={articles} />
     </div>
   );
