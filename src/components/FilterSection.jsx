@@ -3,18 +3,14 @@ import React, { useState } from "react";
 export default function Filter({
   sortAscendingArticles,
   sortDescendingArticles,
-  searchText,
+  searchForPost,
 }) {
   const [userInput, setUserInput] = useState("");
 
   function searchPosts(e) {
     e.preventDefault();
 
-    searchText(userInput);
-  }
-
-  function searchText(e) {
-    setUserInput(e.target.value);
+    searchForPost(userInput);
   }
 
   return (
@@ -23,7 +19,7 @@ export default function Filter({
         type="text"
         value={userInput.searchBar}
         placeholder="Suchen"
-        onChange={(e) => searchText(e)}
+        onChange={(e) => setUserInput(e.target.value)}
       />
       <input type="submit" value="Search" onClick={(e) => searchPosts(e)} />
       <button onClick={sortAscendingArticles}>Points Descending</button>
