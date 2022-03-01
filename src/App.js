@@ -36,6 +36,7 @@ function App() {
         </h1>
         <h2>Your one stop shop for only the hackiest hacker news</h2>
       </section>
+
       <section className="container-list">
         <CardList articles={articles} />
       </section>
