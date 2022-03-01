@@ -6,7 +6,7 @@ export default function CardList ({articles}) {
     
 
     return(
-        <ul style={{listStyleType: "none"}}>
+        <ul class="cards-list" style={{listStyleType: "none"}}>
             {articles.map(article => <CardItem article={article} key={article.id} />)}
         </ul>
     )
