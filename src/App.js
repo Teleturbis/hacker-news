@@ -19,9 +19,9 @@ function App() {
   }, []);
 
   const populate = (u) => {
-    u.hits.forEach((hit) => { 
-      if(!hit.title) return;
-      
+    u.hits.forEach((hit) => {
+      if (!hit.title) return;
+
       const article = new Article(hit);
       setArticles((prevArticles) => [...prevArticles, article]);
     });
