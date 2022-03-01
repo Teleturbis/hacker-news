@@ -7,7 +7,7 @@ function App() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    const url = './data.json';
+    const url = 'http://hn.algolia.com/api/v1/search?page=1';
 
     fetch(url)
       .then((response) => {
@@ -19,7 +19,9 @@ function App() {
   }, []);
 
   const populate = (u) => {
-    u.hits.forEach((hit) => {
+    u.hits.forEach((hit) => { 
+      if(!hit.title) return;
+      
       const article = new Article(hit);
       setArticles((prevArticles) => [...prevArticles, article]);
     });

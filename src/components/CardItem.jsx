@@ -1,10 +1,6 @@
 import React from 'react';
 
 export default function CardItem({ article }) {
-  if (!article.url) {
-    // console.log(article);
-  }
-
   return (
     <li className="card">
       <div className="article-title-box">
@@ -29,7 +25,6 @@ export default function CardItem({ article }) {
           <i className="fa-solid fa-user"></i>
           <span>{article.author}</span>
         </li>
-        {/* <li className="card-badge">Created at: {article.date}</li> */}
         <li className="card-badge">
           <i className="fa-solid fa-message"></i>
           <span>{article.commentCount}</span>
