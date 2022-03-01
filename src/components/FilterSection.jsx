@@ -1,14 +1,15 @@
-import React from "react"
+import React from "react";
 
-export default function Filter ({sortAscendingArticles, sortDescendingArticles}) {
-
-    return(
-        <div>
-            <button onClick={sortAscendingArticles}>Points Ascending</button>
-            <button onClick={sortDescendingArticles}>Points Descending</button>
-        </div>
-    )
-
+export default function Filter({
+  sortAscendingArticles,
+  sortDescendingArticles,
+}) {
+  return (
+    <div>
+      <button onClick={sortAscendingArticles}>Points Ascending</button>
+      <button onClick={sortDescendingArticles}>Points Descending</button>
+    </div>
+  );
 }
 
 /*

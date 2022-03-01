@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
-import Article from './Article';
-import CardList from './components/CardList.jsx';
-import FilterSection from './components/FilterSection.jsx';
+import { useEffect, useState } from "react";
+import Article from "./Article";
+import CardList from "./components/CardList.jsx";
+import FilterSection from "./components/FilterSection.jsx";
 
 function App() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    const url = './data.json';
+    const url = "./data.json";
 
     fetch(url)
       .then((response) => {
@@ -18,24 +18,24 @@ function App() {
       });
   }, []);
 
-  function sortAscendingArticles(){
-
+  function sortAscendingArticles() {
     let tempArticles = [...articles];
 
-    tempArticles = tempArticles.sort(function(b, a){return a.points - b.points});
+    tempArticles = tempArticles.sort(function (b, a) {
+      return a.points - b.points;
+    });
 
     setArticles(tempArticles);
-
   }
 
-  function sortDescendingArticles(){
-
+  function sortDescendingArticles() {
     let tempArticles = [...articles];
 
-    tempArticles = tempArticles.sort(function(a, b){return a.points - b.points});
+    tempArticles = tempArticles.sort(function (a, b) {
+      return a.points - b.points;
+    });
 
     setArticles(tempArticles);
-
   }
 
   const populate = (u) => {
@@ -47,8 +47,12 @@ function App() {
 
   return (
     <div>
-      <h1 id='headline'>HackerNews</h1>
-      <FilterSection articles={articles} sortAscendingArticles={sortAscendingArticles} sortDescendingArticles={sortDescendingArticles}/>
+      <h1 id="headline">HackerNews</h1>
+      <FilterSection
+        articles={articles}
+        sortAscendingArticles={sortAscendingArticles}
+        sortDescendingArticles={sortDescendingArticles}
+      />
       <CardList articles={articles} />
     </div>
   );

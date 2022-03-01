@@ -1,8 +1,6 @@
-import React from 'react';
+import React from "react";
 
 export default function CardItem({ article }) {
-
-
   return (
     <li className="card">
       <div className="article-title-box">
