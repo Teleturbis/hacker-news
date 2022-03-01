@@ -4,10 +4,17 @@ export default function CardItem({ article }) {
   return (
     <li className="card">
       <div className="article-title-box">
-        <a className="article-title" href={article.url} target="_blank">
+        <span className="article-title">
           <h2>{article.title}</h2>
-        </a>
+        </span>
       </div>
+
+      {article.url && (
+        <a className="article-url" href={article.url} target="_blank">
+          <span>{article.url.substring(0, 40)}{article.url.length > 40 ? '...' : ''}</span>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      )}
 
       <ul className="card-badges">
         <li className="card-badge">
