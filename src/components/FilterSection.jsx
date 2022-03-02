@@ -4,6 +4,9 @@ export default function Filter({
   sortAscendingArticles,
   sortDescendingArticles,
   searchForPost,
+  sortNewestArticles,
+  sortOldestArticles,
+  sortTrendingArticles,
 }) {
   const [userInput, setUserInput] = useState("");
 
@@ -22,8 +25,14 @@ export default function Filter({
         onChange={(e) => setUserInput(e.target.value)}
       />
       <input type="submit" value="Search" onClick={(e) => searchPosts(e)} />
-      <button onClick={sortAscendingArticles}>Points Descending</button>
-      <button onClick={sortDescendingArticles}>Points Ascending</button>
+
+      <select name="filters">
+        <option onClick={sortAscendingArticles}>Points Descending</option>
+        <option onClick={sortDescendingArticles}>Points Ascending</option>
+        <option onClick={sortNewestArticles}>Newest</option>
+        <option onClick={sortOldestArticles}>Oldest</option>
+        <option onClick={sortTrendingArticles}>Trending</option>
+      </select>
     </div>
   );
 }

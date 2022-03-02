@@ -6,6 +6,7 @@ export default class Article {
     this.url = hit.url;
     this.date = new Date(Date.parse(hit.created_at)).toDateString();
     this.age = Util.toRelativeTimeStr(new Date() - Date.parse(hit.created_at));
+    this.ageInt = new Date() - Date.parse(hit.created_at);
     this.author = hit.author;
     this.points = hit.points;
     this.id = hit.objectID;
