@@ -11,6 +11,7 @@ function App() {
   /***************************/
 
   const [articles, setArticles] = useState([]);
+  const [backupArticles, setBackupArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [noResultFound, setNoResultFound] = useState(false);
 
@@ -39,7 +40,7 @@ function App() {
   /***************************/
 
   function sortAscendingArticles() {
-    let tempArticles = [...articles];
+    let tempArticles = [...backupArticles];
 
     tempArticles = tempArticles.sort(function (b, a) {
       return a.points - b.points;
@@ -49,7 +50,7 @@ function App() {
   }
 
   function sortDescendingArticles() {
-    let tempArticles = [...articles];
+    let tempArticles = [...backupArticles];
 
     tempArticles = tempArticles.sort(function (a, b) {
       return a.points - b.points;
@@ -59,7 +60,7 @@ function App() {
   }
 
   function sortNewestArticles() {
-    let tempArticles = [...articles];
+    let tempArticles = [...backupArticles];
 
     tempArticles = tempArticles.sort(function (a, b) {
       return a.ageInt - b.ageInt;
@@ -69,7 +70,7 @@ function App() {
   }
 
   function sortOldestArticles() {
-    let tempArticles = [...articles];
+    let tempArticles = [...backupArticles];
 
     tempArticles = tempArticles.sort(function (b, a) {
       return a.ageInt - b.ageInt;
@@ -79,16 +80,17 @@ function App() {
   }
 
   function sortTrendingArticles() {
+    setBackupArticles([...articles]);
+
     let tempArticles = [...articles];
 
-    tempArticles.forEach((el) => {
-      })
+    tempArticles = tempArticles.filter(
+      (article) => article.ageInt < 2592000000 * 12
+    );
 
     tempArticles = tempArticles.sort(function (a, b) {
-      if(a.ageInt <= (2592000000*12)){    // 2592000000 = 1 Monat in ms
-        return a.points / a.ageInt - b.points / b.ageInt;
-      }
-    return null;
+      // 2592000000 = 1 Monat in ms
+      return (a.ageInt/a.points) - (b.ageInt/b.points)
     });
 
     setArticles(tempArticles);
@@ -122,6 +124,7 @@ function App() {
       a.push(article);
     });
     setArticles(a);
+    setBackupArticles(a);
 
     setIsLoading(false);
 
