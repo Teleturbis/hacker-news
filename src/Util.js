@@ -17,4 +17,12 @@ export default class Util {
       return `${minutes} ${minutes > 1 ? 'minutes' : 'minute'} ago`;
     return `just now`;
   }
+
+  static addHighlightsToString(str, highlightText) {
+    console.log(str, highlightText);
+    return str.replaceAll(
+      highlightText,
+      <span class="highlight">${highlightText}</span>
+    );
+  }
 }
