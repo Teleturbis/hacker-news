@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import Article from "./Article";
-import CardList from "./components/CardList.jsx";
-import FilterSection from "./components/FilterSection.jsx";
+import { useEffect, useState } from 'react';
+import Article from './Article';
+import CardList from './components/CardList.jsx';
+import FilterSection from './components/FilterSection.jsx';
 
 function App() {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    const url = "http://hn.algolia.com/api/v1/search?page=1";
+    const url = 'http://hn.algolia.com/api/v1/search?page=1';
 
     fetchData(url);
   }, []);
@@ -72,12 +72,12 @@ function App() {
         <h2>Your one stop shop for only the hackiest hacker news</h2>
       </section>
 
+      <FilterSection
+        sortDescendingArticles={sortDescendingArticles}
+        sortAscendingArticles={sortAscendingArticles}
+        searchForPost={searchForPost}
+      />
       <section className="container-list">
-        <FilterSection
-          sortDescendingArticles={sortDescendingArticles}
-          sortAscendingArticles={sortAscendingArticles}
-          searchForPost={searchForPost}
-        />
         <CardList articles={articles} />
       </section>
     </div>
