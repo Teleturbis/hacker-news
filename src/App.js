@@ -14,9 +14,10 @@ function App() {
   const [backupArticles, setBackupArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [noResultFound, setNoResultFound] = useState(false);
+  const [counter, setCounter] = useState(1);
 
   /********************************/
-  /*    vvv INITIAL FETCH vvv     */
+  /*      vvv USEEFFECTS vvv      */
   /********************************/
 
   useEffect(() => {
@@ -24,6 +25,12 @@ function App() {
 
     fetchData(url);
   }, []);
+
+  useEffect(()=>{
+    let url = `http://hn.algolia.com/api/v1/search?page=${counter}`;
+    fetchData(url);
+    console.log(counter)
+  }, [counter])
 
   /***************************/
   /*    vvv SEARCH vvv       */
@@ -38,16 +45,6 @@ function App() {
   /***************************/
   /*      vvv SORT vvv       */
   /***************************/
-
-  function sortAscendingArticles() {
-    let tempArticles = [...backupArticles];
-
-    tempArticles = tempArticles.sort(function (b, a) {
-      return a.points - b.points;
-    });
-
-    setArticles(tempArticles);
-  }
 
   function sortDescendingArticles() {
     let tempArticles = [...backupArticles];
@@ -94,6 +91,28 @@ function App() {
     });
 
     setArticles(tempArticles);
+  }
+
+  /***************************/
+  /*     vvv PAGES vvv       */
+  /***************************/
+  
+  function nextPageHandler(){
+  
+    setCounter(counter + 1);
+
+  }
+
+  function prevPageHandler(){
+
+    if(counter <= 1){
+      return
+    } else {
+    
+    setCounter(counter - 1);
+
+    }
+
   }
 
   /***************************/
@@ -151,7 +170,6 @@ function App() {
       <div className="container-filter">
         <FilterSection
           sortDescendingArticles={sortDescendingArticles}
-          sortAscendingArticles={sortAscendingArticles}
           searchForPost={searchForPost}
           sortNewestArticles={sortNewestArticles}
           sortOldestArticles={sortOldestArticles}
@@ -167,6 +185,10 @@ function App() {
           <CardList articles={articles} />
         )}
       </section>
+      <div style={{width: "100%", display: "flex", justifyContent: "center", margin: "2rem 0"}}>
+        <button  onClick={() => prevPageHandler()} disabled={counter == 1 ? true : false}>Previous Page</button>
+        <button onClick={() => nextPageHandler()}>Next Page</button>
+      </div>
     </div>
   );
 }

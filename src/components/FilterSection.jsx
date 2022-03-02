@@ -27,7 +27,6 @@ export default function Filter({
       <input type="submit" value="Search" onClick={(e) => searchPosts(e)} />
 
       <select name="filters">
-        <option onClick={sortAscendingArticles}>Points Ascending</option>
         <option onClick={sortDescendingArticles}>Points Descending</option>
         <option onClick={sortNewestArticles}>Newest</option>
         <option onClick={sortOldestArticles}>Oldest</option>
