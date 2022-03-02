@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
-import Article from './Article';
-import CardList from './components/CardList.jsx';
-import FilterSection from './components/FilterSection.jsx';
+import { useEffect, useState } from "react";
+import Article from "./Article";
+import CardList from "./components/CardList.jsx";
+import FilterSection from "./components/FilterSection.jsx";
 
 function App() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [noResultFound, setNoResultFound] = useState(false);
 
   useEffect(() => {
-    const url = 'http://hn.algolia.com/api/v1/search?page=1';
+    const url = "http://hn.algolia.com/api/v1/search?page=1";
 
     fetchData(url);
   }, []);
@@ -51,10 +52,13 @@ function App() {
     const url = `http://hn.algolia.com/api/v1/search?query=${searchText}`;
 
     fetchData(url);
+
+    if (articles.length <= 0) {
+      setNoResultFound(true);
+    }
   }
 
   function fetchData(url) {
-
     setIsLoading(true);
 
     fetch(url)
@@ -84,8 +88,16 @@ function App() {
         />
       </div>
       <section className="container-list">
-        {/*isLoading ? <img src='data/loading.gif' /> : <CardList articles={articles} />*/}
-        <img src='data/loading.gif' />
+        {isLoading ? (
+          <div>
+            <img src="http://i.stack.imgur.com/SBv4T.gif" width="250" />{" "}
+            <p style={{ textAlign: "center", fontSize: "3rem" }}>
+              Site is loading...
+            </p>
+          </div>
+        ) : (
+          noResultFound ? null : <CardList articles={articles} />
+        )}
       </section>
     </div>
   );
