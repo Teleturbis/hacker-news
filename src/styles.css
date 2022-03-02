@@ -103,6 +103,10 @@ span.highlight {
   background-color: yellow;
 }
 
+.part {
+  border: 1px solid red;
+}
+
 .article-title-box {
   margin-bottom: 0.8rem;
 }

@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default class Util {
   static toRelativeTimeStr(time) {
     const seconds = Math.floor(time / 1000);
@@ -19,10 +21,9 @@ export default class Util {
   }
 
   static addHighlightsToString(str, highlightText) {
-    console.log(str, highlightText);
-    return str.replaceAll(
-      highlightText,
-      <span class="highlight">${highlightText}</span>
-    );
+    const r = new RegExp(`(${highlightText})`, 'ig');
+    str = str.replaceAll(r, `<span class="highlight">$&</span>`);
+
+    return <span dangerouslySetInnerHTML={{ __html: str }}></span>;
   }
 }
