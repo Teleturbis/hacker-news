@@ -63,19 +63,21 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="content">
       <section id="headline">
         <h1>
           Hacker
-          <i class="fa-solid fa-user-secret fa-xs"></i>News
+          <i className="fa-solid fa-user-secret fa-xs"></i>News
         </h1>
         <h2>Your one stop shop for only the hackiest hacker news</h2>
       </section>
-      <FilterSection
-        sortDescendingArticles={sortDescendingArticles}
-        sortAscendingArticles={sortAscendingArticles}
-        searchForPost={searchForPost}
-      />
+      <div className="container-filter">
+        <FilterSection
+          sortDescendingArticles={sortDescendingArticles}
+          sortAscendingArticles={sortAscendingArticles}
+          searchForPost={searchForPost}
+        />
+      </div>
       <section className="container-list">
         <CardList articles={articles} />
       </section>
