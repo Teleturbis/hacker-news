@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Article from "./Article";
 import CardList from "./components/CardList.jsx";
 import FilterSection from "./components/FilterSection.jsx";
+import NoResultsDisplay from "./components/NoResultsDisplay";
+import LoadingScreen from "./components/LoadingScreen.jsx";
 
 function App() {
   const [articles, setArticles] = useState([]);
@@ -45,7 +47,14 @@ function App() {
       a.push(article);
     });
     setArticles(a);
+
     setIsLoading(false);
+
+    if (a.length <= 0) {
+      setNoResultFound(true);
+    } else {
+      setNoResultFound(false);
+    }
   };
 
   function searchForPost(searchText) {
@@ -53,9 +62,6 @@ function App() {
 
     fetchData(url);
 
-    if (articles.length <= 0) {
-      setNoResultFound(true);
-    }
   }
 
   function fetchData(url) {
@@ -89,14 +95,9 @@ function App() {
       </div>
       <section className="container-list">
         {isLoading ? (
-          <div>
-            <img src="http://i.stack.imgur.com/SBv4T.gif" width="250" />{" "}
-            <p style={{ textAlign: "center", fontSize: "3rem" }}>
-              Site is loading...
-            </p>
-          </div>
+          <LoadingScreen/>
         ) : (
-          noResultFound ? null : <CardList articles={articles} />
+          noResultFound ? <NoResultsDisplay /> : <CardList articles={articles} />
         )}
       </section>
     </div>
