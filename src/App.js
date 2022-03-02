@@ -29,7 +29,6 @@ function App() {
   useEffect(()=>{
     let url = `http://hn.algolia.com/api/v1/search?page=${counter}`;
     fetchData(url);
-    console.log(counter)
   }, [counter])
 
   /***************************/
