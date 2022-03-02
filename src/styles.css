@@ -67,6 +67,13 @@ a.article-url:hover {
 
 /* FILTERS */
 
+.container-filter {
+  padding: 2.4rem;
+  margin: 3.2rem auto;
+  width: fit-content;
+  border: 1px dashed var(--dark);
+}
+
 /* LIST & CARD */
 
 .container-list {
