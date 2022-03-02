@@ -5,6 +5,7 @@ import FilterSection from './components/FilterSection.jsx';
 
 function App() {
   const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const url = 'http://hn.algolia.com/api/v1/search?page=1';
@@ -43,6 +44,7 @@ function App() {
       a.push(article);
     });
     setArticles(a);
+    setIsLoading(false);
   };
 
   function searchForPost(searchText) {
@@ -52,6 +54,9 @@ function App() {
   }
 
   function fetchData(url) {
+
+    setIsLoading(true);
+
     fetch(url)
       .then((response) => {
         return response.json();
@@ -71,14 +76,14 @@ function App() {
         </h1>
         <h2>Your one stop shop for only the hackiest hacker news</h2>
       </section>
-
       <FilterSection
         sortDescendingArticles={sortDescendingArticles}
         sortAscendingArticles={sortAscendingArticles}
         searchForPost={searchForPost}
       />
       <section className="container-list">
-        <CardList articles={articles} />
+        {/*isLoading ? <img src='data/loading.gif' /> : <CardList articles={articles} />*/}
+        <img src='data/loading.gif' />
       </section>
     </div>
   );
