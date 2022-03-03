@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import Article from './Article';
-import User from './User';
-import CardList from './components/CardList.jsx';
-import FilterSection from './components/FilterSection.jsx';
-import NoResultsDisplay from './components/NoResultsDisplay';
-import LoadingScreen from './components/LoadingScreen.jsx';
-import Modal from './components/Modal';
+import { useEffect, useState } from "react";
+import Article from "./Article";
+import User from "./User";
+import CardList from "./components/CardList.jsx";
+import FilterSection from "./components/FilterSection.jsx";
+import NoResultsDisplay from "./components/NoResultsDisplay";
+import LoadingScreen from "./components/LoadingScreen.jsx";
+import Modal from "./components/Modal";
 
 function App() {
   /***************************/
@@ -14,7 +14,7 @@ function App() {
 
   const [articles, setArticles] = useState([]);
   const [backupArticles, setBackupArticles] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [noResultFound, setNoResultFound] = useState(false);
   const [counter, setCounter] = useState(1);
@@ -25,7 +25,7 @@ function App() {
   /********************************/
 
   useEffect(() => {
-    const url = 'http://hn.algolia.com/api/v1/search?page=1';
+    const url = "http://hn.algolia.com/api/v1/search?page=1";
 
     fetchData(url);
   }, []);
@@ -215,19 +215,26 @@ function App() {
         </section>
         <div
           style={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            margin: '2rem 0'
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            margin: "2rem 0",
           }}
         >
-          <button
-            onClick={() => prevPageHandler()}
-            disabled={counter == 1 ? true : false}
-          >
-            Previous Page
-          </button>
-          <button onClick={() => nextPageHandler()}>Next Page</button>
+          {isLoading ? null : (
+            <div className="pageButtonDiv">
+              <button
+                onClick={() => prevPageHandler()}
+                disabled={counter == 1 ? true : false}
+                className="pageButton"
+              >
+                Previous Page
+              </button>
+              <button className="pageButton" onClick={() => nextPageHandler()}>
+                Next Page
+              </button>
+            </div>
+          )}
         </div>
       </div>
       <Modal selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
