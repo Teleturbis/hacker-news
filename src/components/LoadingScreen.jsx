@@ -11,14 +11,3 @@ export default function LoadingScreen() {
     </div>
   );
 }
-
-/*
-
-    -alter
-    -points         CHECKED
-    -hot
-    -comments
-
-    -searchbar      CHECKED
-
-*/

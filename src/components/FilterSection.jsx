@@ -37,8 +37,6 @@ export default function Filter({
 
   }
 
-                                  // <button onClick={sortOldestArticles}>Oldest</button>
-
   return (
     <div>
       <input
@@ -58,14 +56,3 @@ export default function Filter({
     </div>
   );
 }
-
-/*
-
-    -alter
-    -points         CHECKED
-    -hot
-    -comments
-
-    -searchbar      CHECKED
-
-*/
