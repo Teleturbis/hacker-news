@@ -3,5 +3,7 @@ export default class User {
     this.username = hit.username;
     this.about = hit.about;
     this.karma = hit.karma;
+    // https://avatars.dicebear.com/
+    this.avatarUrl = `https://avatars.dicebear.com/api/avataaars/${this.username}.svg?scale=120&flip=1`;
   }
 }

@@ -12,7 +12,7 @@
 
 html {
   font-size: 62.5%;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 body {
@@ -93,7 +93,7 @@ body {
   display: inline-block;
   font-size: 4.8rem;
   letter-spacing: 1.2px;
-  font-family: "Bebas Neue", sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 #headline i {
@@ -266,7 +266,7 @@ span.highlight {
 /* MODAL */
 
 .modal-container {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100vh;
   top: 0;
@@ -280,7 +280,7 @@ span.highlight {
 
 .modal-window {
   position: relative;
-  width: 32rem;
+  max-width: 64rem;
   height: fit-content;
   padding: 2rem;
 
@@ -307,4 +307,17 @@ span.highlight {
   padding: 2rem;
   border: 1px dashed var(--dark);
   border-radius: 4px;
+}
+
+.author-name-box {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.author-avatar {
+  width: 6rem;
+  border-radius: 50%;
+  /* border: 2px solid #2d2c35; */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }

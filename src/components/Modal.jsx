@@ -18,7 +18,15 @@ export default function Modal({ selectedUser, setSelectedUser }) {
         >
           <i className="fa-solid fa-xmark"></i>
         </a>
-        <h2 className="author-name">{selectedUser.username}</h2>
+        <div className="author-name-box">
+          <img
+            className="author-avatar"
+            src={selectedUser.avatarUrl}
+            alt=""
+          ></img>
+          {/* <p>Avatar url: '{selectedUser.avatarUrl}'</p> */}
+          <h2 className="author-name">{selectedUser.username}</h2>
+        </div>
         <p
           className="author-about"
           dangerouslySetInnerHTML={{ __html: selectedUser.about }}
