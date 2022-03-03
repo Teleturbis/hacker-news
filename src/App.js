@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
-import Article from "./Article";
-import CardList from "./components/CardList.jsx";
-import FilterSection from "./components/FilterSection.jsx";
-import NoResultsDisplay from "./components/NoResultsDisplay";
-import LoadingScreen from "./components/LoadingScreen.jsx";
+import { useEffect, useState } from 'react';
+import Article from './Article';
+import User from './User';
+import CardList from './components/CardList.jsx';
+import FilterSection from './components/FilterSection.jsx';
+import NoResultsDisplay from './components/NoResultsDisplay';
+import LoadingScreen from './components/LoadingScreen.jsx';
+import Modal from './components/Modal';
 
 function App() {
   /***************************/
@@ -12,17 +14,18 @@ function App() {
 
   const [articles, setArticles] = useState([]);
   const [backupArticles, setBackupArticles] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [noResultFound, setNoResultFound] = useState(false);
   const [counter, setCounter] = useState(1);
+  const [selectedUser, setSelectedUser] = useState();
 
   /********************************/
   /*      vvv USEEFFECTS vvv      */
   /********************************/
 
   useEffect(() => {
-    const url = "http://hn.algolia.com/api/v1/search?page=1";
+    const url = 'http://hn.algolia.com/api/v1/search?page=1';
 
     fetchData(url);
   }, []);
@@ -159,11 +162,27 @@ function App() {
     }
   };
 
+  function fetchUserData(name) {
+    let url = `http://hn.algolia.com/api/v1/users/${name}`;
+
+    //setIsLoading(true);
+
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((jsonResponse) => {
+        setSelectedUser(new User(jsonResponse));
+      })
+      .catch((err) => console.error(err));
+  }
+
   /*****************************/
   /*      vvv RETURN vvv       */
   /*****************************/
 
   return (
+    <>
     <div className="content">
       <section id="headline">
         <h1>
@@ -187,7 +206,11 @@ function App() {
         ) : noResultFound ? (
           <NoResultsDisplay />
         ) : (
-          <CardList articles={articles} searchTerm={searchTerm} />
+          <CardList
+              articles={articles}
+              searchTerm={searchTerm}
+              fetchUserData={fetchUserData}
+            />
         )}
       </section>
       <div
@@ -213,7 +236,8 @@ function App() {
           </div>
         )}
       </div>
-    </div>
+      <Modal selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
+    </>
   );
 }
 
