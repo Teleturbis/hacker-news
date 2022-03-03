@@ -198,18 +198,20 @@ function App() {
           margin: "2rem 0",
         }}
       >
-        {isLoading ? null : <div className="pageButtonDiv">
-        <button
-          onClick={() => prevPageHandler()}
-          disabled={counter == 1 ? true : false}
-          className="pageButton"
-        >
-          Previous Page
-        </button>
-        <button className="pageButton" onClick={() => nextPageHandler()}>
-          Next Page
-        </button>
-        </div>}
+        {isLoading ? null : (
+          <div className="pageButtonDiv">
+            <button
+              onClick={() => prevPageHandler()}
+              disabled={counter == 1 ? true : false}
+              className="pageButton"
+            >
+              Previous Page
+            </button>
+            <button className="pageButton" onClick={() => nextPageHandler()}>
+              Next Page
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
