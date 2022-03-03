@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
-import Article from "./Article";
-import CardList from "./components/CardList.jsx";
-import FilterSection from "./components/FilterSection.jsx";
+import { useEffect, useState } from 'react';
+import Article from './Article';
+import CardList from './components/CardList.jsx';
+import FilterSection from './components/FilterSection.jsx';
 
 function App() {
   const [articles, setArticles] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [noResultFound, setNoResultFound] = useState(false);
 
   useEffect(() => {
-    const url = "http://hn.algolia.com/api/v1/search?page=1";
+    const url = 'http://hn.algolia.com/api/v1/search?page=1';
 
     fetchData(url);
   }, []);
@@ -48,8 +49,9 @@ function App() {
     setIsLoading(false);
   };
 
-  function searchForPost(searchText) {
-    const url = `http://hn.algolia.com/api/v1/search?query=${searchText}`;
+  function searchForPost(str) {
+    setSearchTerm(str);
+    const url = `http://hn.algolia.com/api/v1/search?query=${str}`;
 
     fetchData(url);
 
@@ -90,13 +92,13 @@ function App() {
       <section className="container-list">
         {isLoading ? (
           <div>
-            <img src="http://i.stack.imgur.com/SBv4T.gif" width="250" />{" "}
-            <p style={{ textAlign: "center", fontSize: "3rem" }}>
+            <img src="http://i.stack.imgur.com/SBv4T.gif" width="250" />{' '}
+            <p style={{ textAlign: 'center', fontSize: '3rem' }}>
               Site is loading...
             </p>
           </div>
-        ) : (
-          noResultFound ? null : <CardList articles={articles} />
+        ) : noResultFound ? null : (
+          <CardList articles={articles} searchTerm={searchTerm} />
         )}
       </section>
     </div>
