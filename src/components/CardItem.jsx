@@ -1,7 +1,11 @@
 import React from 'react';
 import Util from '../Util';
 
-export default function CardItem({ article, searchTerm }) {
+export default function CardItem({ article, searchTerm, fetchUserData }) {
+  const onClickAuthor = () => {
+    fetchUserData(article.author);
+  }
+
   return (
     <li className="card">
       <div className="article-title-box">
@@ -31,7 +35,7 @@ export default function CardItem({ article, searchTerm }) {
         </li>
         <li className="card-badge">
           <i className="fa-solid fa-user"></i>
-          <span>{article.author}</span>
+          <span><a onClick={onClickAuthor}>{article.author}</a></span>
         </li>
         <li className="card-badge">
           <i className="fa-solid fa-message"></i>

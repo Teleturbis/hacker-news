@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
-import Article from "./Article";
-import CardList from "./components/CardList.jsx";
-import FilterSection from "./components/FilterSection.jsx";
-import NoResultsDisplay from "./components/NoResultsDisplay";
-import LoadingScreen from "./components/LoadingScreen.jsx";
+import { useEffect, useState } from 'react';
+import Article from './Article';
+import User from './User';
+import CardList from './components/CardList.jsx';
+import FilterSection from './components/FilterSection.jsx';
+import NoResultsDisplay from './components/NoResultsDisplay';
+import LoadingScreen from './components/LoadingScreen.jsx';
+import Modal from './components/Modal';
 
 function App() {
   /***************************/
@@ -12,17 +14,18 @@ function App() {
 
   const [articles, setArticles] = useState([]);
   const [backupArticles, setBackupArticles] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [noResultFound, setNoResultFound] = useState(false);
   const [counter, setCounter] = useState(1);
+  const [selectedUser, setSelectedUser] = useState();
 
   /********************************/
   /*      vvv USEEFFECTS vvv      */
   /********************************/
 
   useEffect(() => {
-    const url = "http://hn.algolia.com/api/v1/search?page=1";
+    const url = 'http://hn.algolia.com/api/v1/search?page=1';
 
     fetchData(url);
   }, []);
@@ -157,54 +160,76 @@ function App() {
     }
   };
 
+  function fetchUserData(name) {
+    let url = `http://hn.algolia.com/api/v1/users/${name}`;
+
+    //setIsLoading(true);
+
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((jsonResponse) => {
+        setSelectedUser(new User(jsonResponse));
+      })
+      .catch((err) => console.error(err));
+  }
+
   /*****************************/
   /*      vvv RETURN vvv       */
   /*****************************/
 
   return (
-    <div className="content">
-      <section id="headline">
-        <h1>
-          Hacker
-          <i className="fa-solid fa-user-secret fa-xs"></i>News
-        </h1>
-        <h2>Your one stop shop for only the hackiest hacker news</h2>
-      </section>
-      <div className="container-filter">
-        <FilterSection
-          sortDescendingArticles={sortDescendingArticles}
-          searchForPost={searchForPost}
-          sortNewestArticles={sortNewestArticles}
-          sortOldestArticles={sortOldestArticles}
-          sortTrendingArticles={sortTrendingArticles}
-        />
-      </div>
-      <section className="container-list">
-        {isLoading ? (
-          <LoadingScreen />
-        ) : noResultFound ? (
-          <NoResultsDisplay />
-        ) : (
-          <CardList articles={articles} searchTerm={searchTerm} />
-        )}
-      </section>
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          margin: "2rem 0",
-        }}
-      >
-        <button
-          onClick={() => prevPageHandler()}
-          disabled={counter == 1 ? true : false}
+    <>
+      <div className="content">
+        <section id="headline">
+          <h1>
+            Hacker
+            <i className="fa-solid fa-user-secret fa-xs"></i>News
+          </h1>
+          <h2>Your one stop shop for only the hackiest hacker news</h2>
+        </section>
+        <div className="container-filter">
+          <FilterSection
+            sortDescendingArticles={sortDescendingArticles}
+            searchForPost={searchForPost}
+            sortNewestArticles={sortNewestArticles}
+            sortOldestArticles={sortOldestArticles}
+            sortTrendingArticles={sortTrendingArticles}
+          />
+        </div>
+        <section className="container-list">
+          {isLoading ? (
+            <LoadingScreen />
+          ) : noResultFound ? (
+            <NoResultsDisplay />
+          ) : (
+            <CardList
+              articles={articles}
+              searchTerm={searchTerm}
+              fetchUserData={fetchUserData}
+            />
+          )}
+        </section>
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            margin: '2rem 0'
+          }}
         >
-          Previous Page
-        </button>
-        <button onClick={() => nextPageHandler()}>Next Page</button>
+          <button
+            onClick={() => prevPageHandler()}
+            disabled={counter == 1 ? true : false}
+          >
+            Previous Page
+          </button>
+          <button onClick={() => nextPageHandler()}>Next Page</button>
+        </div>
       </div>
-    </div>
+      <Modal selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
+    </>
   );
 }
 
