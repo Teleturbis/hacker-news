@@ -31,7 +31,7 @@ body {
 }
 
 .btn-user {
-  outline: thick ridge rgb(0, 255, 34);
+  text-decoration: underline;
 }
 
 .btn-user:hover {
@@ -286,7 +286,7 @@ span.highlight {
 
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 1.2rem;
 
   word-wrap: break-word;
 
@@ -299,4 +299,12 @@ span.highlight {
 
 .author-about p {
   opacity: 0.4;
+}
+
+.author-karma {
+  color: var(--dark);
+  text-align: center;
+  padding: 2rem;
+  border: 1px dashed var(--dark);
+  border-radius: 4px;
 }
