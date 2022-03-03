@@ -21,7 +21,7 @@ body {
 }
 
 .pageButtonDiv{
-  
+
   width: 96rem;
 
   display: flex;
@@ -42,6 +42,8 @@ body {
   background-color: transparent;
 
   text-align: center;
+
+  color: var(--dark);
 
   border-radius: 0.2em;
   border-style: solid;
@@ -132,6 +134,7 @@ a.article-url:hover {
   background-color: transparent;
 
   text-align: center;
+  color: var(--dark);
 
   border-radius: 0.2em;
   border-style: solid;
@@ -159,6 +162,7 @@ a.article-url:hover {
   background-color: transparent;
 
   text-align: center;
+  color: var(--dark);
 
   border-radius: 0.2em;
   border-style: solid;
