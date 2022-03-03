@@ -65,6 +65,8 @@ function App() {
     tempArticles = tempArticles.sort(function (a, b) {
       return a.ageInt - b.ageInt;
     });
+
+    setArticles(tempArticles);
   }
 
   function searchForPost(str) {
