@@ -183,52 +183,58 @@ function App() {
 
   return (
     <>
-      <div className="content">
-        <section id="headline">
-          <h1>
-            Hacker
-            <i className="fa-solid fa-user-secret fa-xs"></i>News
-          </h1>
-          <h2>Your one stop shop for only the hackiest hacker news</h2>
-        </section>
-        <div className="container-filter">
-          <FilterSection
-            sortDescendingArticles={sortDescendingArticles}
-            searchForPost={searchForPost}
-            sortNewestArticles={sortNewestArticles}
-            sortOldestArticles={sortOldestArticles}
-            sortTrendingArticles={sortTrendingArticles}
-          />
-        </div>
-        <section className="container-list">
-          {isLoading ? (
-            <LoadingScreen />
-          ) : noResultFound ? (
-            <NoResultsDisplay />
-          ) : (
-            <CardList
+    <div className="content">
+      <section id="headline">
+        <h1>
+          Hacker
+          <i className="fa-solid fa-user-secret fa-xs"></i>News
+        </h1>
+        <h2>Your one stop shop for only the hackiest hacker news</h2>
+      </section>
+      <div className="container-filter">
+        <FilterSection
+          sortDescendingArticles={sortDescendingArticles}
+          searchForPost={searchForPost}
+          sortNewestArticles={sortNewestArticles}
+          sortOldestArticles={sortOldestArticles}
+          sortTrendingArticles={sortTrendingArticles}
+        />
+      </div>
+      <section className="container-list">
+        {isLoading ? (
+          <LoadingScreen />
+        ) : noResultFound ? (
+          <NoResultsDisplay />
+        ) : (
+          <CardList
               articles={articles}
               searchTerm={searchTerm}
               fetchUserData={fetchUserData}
             />
-          )}
-        </section>
-        <div
-          style={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            margin: '2rem 0'
-          }}
-        >
-          <button
-            onClick={() => prevPageHandler()}
-            disabled={counter == 1 ? true : false}
-          >
-            Previous Page
-          </button>
-          <button onClick={() => nextPageHandler()}>Next Page</button>
-        </div>
+        )}
+      </section>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          margin: "2rem 0",
+        }}
+      >
+        {isLoading ? null : (
+          <div className="pageButtonDiv">
+            <button
+              onClick={() => prevPageHandler()}
+              disabled={counter == 1 ? true : false}
+              className="pageButton"
+            >
+              Previous Page
+            </button>
+            <button className="pageButton" onClick={() => nextPageHandler()}>
+              Next Page
+            </button>
+          </div>
+        )}
       </div>
       <Modal selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
     </>

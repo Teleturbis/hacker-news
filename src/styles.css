@@ -12,7 +12,7 @@
 
 html {
   font-size: 62.5%;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 body {
@@ -47,22 +47,18 @@ body {
   right: 0;
 }
 
-.pageButtonDiv{
-
+.pageButtonDiv {
   width: 96rem;
 
   display: flex;
   justify-content: space-between;
-
 }
 
-.pageButton{
-
+.pageButton {
   margin: 0 1em;
   width: 50%;
 
   background-color: tomato;
-
 
   padding: 0.25em 0.5em;
 
@@ -80,14 +76,11 @@ body {
   cursor: pointer;
 
   transition: 150ms;
-
 }
 
-.pageButton:hover{
-
+.pageButton:hover {
   box-shadow: rgba(99, 99, 99, 0.75) 0px 2px 6px 0px;
   width: 55%;
-
 }
 
 /* NAV */
@@ -103,7 +96,7 @@ body {
   display: inline-block;
   font-size: 4.8rem;
   letter-spacing: 1.2px;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: "Bebas Neue", sans-serif;
 }
 
 #headline i {
@@ -148,17 +141,14 @@ a.article-url:hover {
   border: 1px dashed var(--dark);
 }
 
-.filters{
-
+.filters {
   margin-top: 1em;
 
   display: flex;
   justify-content: space-between;
-
 }
 
-.filterButton{
-
+.filterButton {
   padding: 0.25em 0.5em;
   width: 25%;
 
@@ -175,18 +165,14 @@ a.article-url:hover {
   cursor: pointer;
 
   transition: 150ms;
-
 }
 
-.filterButton:hover{
-
+.filterButton:hover {
   box-shadow: rgba(99, 99, 99, 0.75) 0px 2px 6px 0px;
   width: 28%;
-
 }
 
-.searchButton{
-
+.searchButton {
   padding: 0.25em 0.5em;
   width: 25%;
 
@@ -205,17 +191,13 @@ a.article-url:hover {
   transition: 150ms;
 
   overflow: hidden;
-
 }
 
-.searchButton:hover{
-
+.searchButton:hover {
   box-shadow: rgba(99, 99, 99, 0.75) 0px 2px 6px 0px;
-
 }
 
-.searchTextInput{
-
+.searchTextInput {
   width: 64%;
   height: 1.25em;
 
@@ -226,7 +208,6 @@ a.article-url:hover {
   border-style: solid;
   border-color: var(--dark);
   border-width: 1px;
-
 }
 
 /* LIST & CARD */
