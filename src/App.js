@@ -62,6 +62,8 @@ function App() {
     tempArticles = tempArticles.sort(function (a, b) {
       return a.ageInt - b.ageInt;
     });
+
+    setArticles(tempArticles);
   }
 
   function searchForPost(str) {
@@ -196,13 +198,18 @@ function App() {
           margin: "2rem 0",
         }}
       >
+        {isLoading ? null : <div className="pageButtonDiv">
         <button
           onClick={() => prevPageHandler()}
           disabled={counter == 1 ? true : false}
+          className="pageButton"
         >
           Previous Page
         </button>
-        <button onClick={() => nextPageHandler()}>Next Page</button>
+        <button className="pageButton" onClick={() => nextPageHandler()}>
+          Next Page
+        </button>
+        </div>}
       </div>
     </div>
   );

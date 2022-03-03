@@ -20,6 +20,47 @@ body {
   color: var(--dark);
 }
 
+.pageButtonDiv{
+  
+  width: 96rem;
+
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.pageButton{
+
+  margin: 0 1em;
+  width: 50%;
+
+  background-color: tomato;
+
+
+  padding: 0.25em 0.5em;
+
+  background-color: transparent;
+
+  text-align: center;
+
+  border-radius: 0.2em;
+  border-style: solid;
+  border-color: var(--dark);
+  border-width: 1px;
+
+  cursor: pointer;
+
+  transition: 150ms;
+
+}
+
+.pageButton:hover{
+
+  box-shadow: rgba(99, 99, 99, 0.75) 0px 2px 6px 0px;
+  width: 55%;
+
+}
+
 /* NAV */
 
 #headline {
@@ -72,6 +113,85 @@ a.article-url:hover {
   margin: 3.2rem auto;
   width: fit-content;
   border: 1px dashed var(--dark);
+}
+
+.filters{
+
+  margin-top: 1em;
+
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.filterButton{
+
+  padding: 0.25em 0.5em;
+  width: 25%;
+
+  background-color: transparent;
+
+  text-align: center;
+
+  border-radius: 0.2em;
+  border-style: solid;
+  border-color: var(--dark);
+  border-width: 1px;
+
+  cursor: pointer;
+
+  transition: 150ms;
+
+}
+
+.filterButton:hover{
+
+  box-shadow: rgba(99, 99, 99, 0.75) 0px 2px 6px 0px;
+  width: 28%;
+
+}
+
+.searchButton{
+
+  padding: 0.25em 0.5em;
+  width: 25%;
+
+  background-color: transparent;
+
+  text-align: center;
+
+  border-radius: 0.2em;
+  border-style: solid;
+  border-color: var(--dark);
+  border-width: 1px;
+
+  cursor: pointer;
+
+  transition: 150ms;
+
+  overflow: hidden;
+
+}
+
+.searchButton:hover{
+
+  box-shadow: rgba(99, 99, 99, 0.75) 0px 2px 6px 0px;
+
+}
+
+.searchTextInput{
+
+  width: 64%;
+  height: 1.25em;
+
+  padding: 0.25em;
+  margin-right: 1em;
+
+  border-radius: 0.2em;
+  border-style: solid;
+  border-color: var(--dark);
+  border-width: 1px;
+
 }
 
 /* LIST & CARD */
