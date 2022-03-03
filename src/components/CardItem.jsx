@@ -7,9 +7,9 @@ export default function CardItem({ article, searchTerm }) {
       <div className="article-title-box">
         <span className="article-title">
           <h2>
-            {searchTerm.length > 2
+            {searchTerm && searchTerm.length > 2
               ? Util.addHighlightsToString(article.title, searchTerm)
-              : article.title}
+            : article.title}
           </h2>
         </span>
       </div>

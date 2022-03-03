@@ -1,32 +1,53 @@
-import { useEffect, useState } from 'react';
-import Article from './Article';
-import CardList from './components/CardList.jsx';
-import FilterSection from './components/FilterSection.jsx';
+import { useEffect, useState } from "react";
+import Article from "./Article";
+import CardList from "./components/CardList.jsx";
+import FilterSection from "./components/FilterSection.jsx";
+import NoResultsDisplay from "./components/NoResultsDisplay";
+import LoadingScreen from "./components/LoadingScreen.jsx";
 
 function App() {
+  /***************************/
+  /*     vvv SATES vvv       */
+  /***************************/
+
   const [articles, setArticles] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [backupArticles, setBackupArticles] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [noResultFound, setNoResultFound] = useState(false);
+  const [counter, setCounter] = useState(1);
+
+  /********************************/
+  /*      vvv USEEFFECTS vvv      */
+  /********************************/
 
   useEffect(() => {
-    const url = 'http://hn.algolia.com/api/v1/search?page=1';
+    const url = "http://hn.algolia.com/api/v1/search?page=1";
 
     fetchData(url);
   }, []);
 
-  function sortAscendingArticles() {
-    let tempArticles = [...articles];
+  useEffect(() => {
+    let url = `http://hn.algolia.com/api/v1/search?page=${counter}`;
+    fetchData(url);
+  }, [counter]);
 
-    tempArticles = tempArticles.sort(function (b, a) {
-      return a.points - b.points;
-    });
+  /***************************/
+  /*    vvv SEARCH vvv       */
+  /***************************/
 
-    setArticles(tempArticles);
+  function searchForPost(searchText) {
+    const url = `http://hn.algolia.com/api/v1/search?query=${searchText}`;
+
+    fetchData(url);
   }
 
+  /***************************/
+  /*      vvv SORT vvv       */
+  /***************************/
+
   function sortDescendingArticles() {
-    let tempArticles = [...articles];
+    let tempArticles = [...backupArticles];
 
     tempArticles = tempArticles.sort(function (a, b) {
       return a.points - b.points;
@@ -35,19 +56,13 @@ function App() {
     setArticles(tempArticles);
   }
 
-  const populate = (u) => {
-    let a = [];
+  function sortNewestArticles() {
+    let tempArticles = [...backupArticles];
 
-    u.hits.forEach((hit) => {
-      if (!hit.title) return;
-
-      const article = new Article(hit);
-
-      a.push(article);
+    tempArticles = tempArticles.sort(function (a, b) {
+      return a.ageInt - b.ageInt;
     });
-    setArticles(a);
-    setIsLoading(false);
-  };
+  }
 
   function searchForPost(str) {
     setSearchTerm(str);
@@ -59,6 +74,53 @@ function App() {
       setNoResultFound(true);
     }
   }
+
+  function sortOldestArticles() {
+    let tempArticles = [...backupArticles];
+
+    tempArticles = tempArticles.sort(function (b, a) {
+      return a.ageInt - b.ageInt;
+    });
+
+    setArticles(tempArticles);
+  }
+
+  function sortTrendingArticles() {
+    setBackupArticles([...articles]);
+
+    let tempArticles = [...articles];
+
+    tempArticles = tempArticles.filter(
+      (article) => article.ageInt < 2592000000 * 12
+    );
+
+    tempArticles = tempArticles.sort(function (a, b) {
+      // 2592000000 = 1 Monat in ms
+      return a.ageInt / a.points - b.ageInt / b.points;
+    });
+
+    setArticles(tempArticles);
+  }
+
+  /***************************/
+  /*     vvv PAGES vvv       */
+  /***************************/
+
+  function nextPageHandler() {
+    setCounter(counter + 1);
+  }
+
+  function prevPageHandler() {
+    if (counter <= 1) {
+      return;
+    } else {
+      setCounter(counter - 1);
+    }
+  }
+
+  /***************************/
+  /*     vvv FETCH vvv       */
+  /***************************/
 
   function fetchData(url) {
     setIsLoading(true);
@@ -73,6 +135,32 @@ function App() {
       .catch((err) => console.error(err));
   }
 
+  const populate = (u) => {
+    let a = [];
+
+    u.hits.forEach((hit) => {
+      if (!hit.title) return;
+
+      const article = new Article(hit);
+
+      a.push(article);
+    });
+    setArticles(a);
+    setBackupArticles(a);
+
+    setIsLoading(false);
+
+    if (a.length <= 0) {
+      setNoResultFound(true);
+    } else {
+      setNoResultFound(false);
+    }
+  };
+
+  /*****************************/
+  /*      vvv RETURN vvv       */
+  /*****************************/
+
   return (
     <div className="content">
       <section id="headline">
@@ -85,22 +173,37 @@ function App() {
       <div className="container-filter">
         <FilterSection
           sortDescendingArticles={sortDescendingArticles}
-          sortAscendingArticles={sortAscendingArticles}
           searchForPost={searchForPost}
+          sortNewestArticles={sortNewestArticles}
+          sortOldestArticles={sortOldestArticles}
+          sortTrendingArticles={sortTrendingArticles}
         />
       </div>
       <section className="container-list">
         {isLoading ? (
-          <div>
-            <img src="http://i.stack.imgur.com/SBv4T.gif" width="250" />{' '}
-            <p style={{ textAlign: 'center', fontSize: '3rem' }}>
-              Site is loading...
-            </p>
-          </div>
-        ) : noResultFound ? null : (
+          <LoadingScreen />
+        ) : noResultFound ? (
+          <NoResultsDisplay />
+        ) : (
           <CardList articles={articles} searchTerm={searchTerm} />
         )}
       </section>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          margin: "2rem 0",
+        }}
+      >
+        <button
+          onClick={() => prevPageHandler()}
+          disabled={counter == 1 ? true : false}
+        >
+          Previous Page
+        </button>
+        <button onClick={() => nextPageHandler()}>Next Page</button>
+      </div>
     </div>
   );
 }
