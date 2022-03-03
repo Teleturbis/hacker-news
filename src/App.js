@@ -12,6 +12,7 @@ function App() {
 
   const [articles, setArticles] = useState([]);
   const [backupArticles, setBackupArticles] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [noResultFound, setNoResultFound] = useState(false);
   const [counter, setCounter] = useState(1);
@@ -26,10 +27,10 @@ function App() {
     fetchData(url);
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     let url = `http://hn.algolia.com/api/v1/search?page=${counter}`;
     fetchData(url);
-  }, [counter])
+  }, [counter]);
 
   /***************************/
   /*    vvv SEARCH vvv       */
@@ -61,8 +62,17 @@ function App() {
     tempArticles = tempArticles.sort(function (a, b) {
       return a.ageInt - b.ageInt;
     });
+  }
 
-    setArticles(tempArticles);
+  function searchForPost(str) {
+    setSearchTerm(str);
+    const url = `http://hn.algolia.com/api/v1/search?query=${str}`;
+
+    fetchData(url);
+
+    if (articles.length <= 0) {
+      setNoResultFound(true);
+    }
   }
 
   function sortOldestArticles() {
@@ -86,7 +96,7 @@ function App() {
 
     tempArticles = tempArticles.sort(function (a, b) {
       // 2592000000 = 1 Monat in ms
-      return (a.ageInt/a.points) - (b.ageInt/b.points)
+      return a.ageInt / a.points - b.ageInt / b.points;
     });
 
     setArticles(tempArticles);
@@ -95,23 +105,17 @@ function App() {
   /***************************/
   /*     vvv PAGES vvv       */
   /***************************/
-  
-  function nextPageHandler(){
-  
-    setCounter(counter + 1);
 
+  function nextPageHandler() {
+    setCounter(counter + 1);
   }
 
-  function prevPageHandler(){
-
-    if(counter <= 1){
-      return
+  function prevPageHandler() {
+    if (counter <= 1) {
+      return;
     } else {
-    
-    setCounter(counter - 1);
-
+      setCounter(counter - 1);
     }
-
   }
 
   /***************************/
@@ -181,11 +185,23 @@ function App() {
         ) : noResultFound ? (
           <NoResultsDisplay />
         ) : (
-          <CardList articles={articles} />
+          <CardList articles={articles} searchTerm={searchTerm} />
         )}
       </section>
-      <div style={{width: "100%", display: "flex", justifyContent: "center", margin: "2rem 0"}}>
-        <button  onClick={() => prevPageHandler()} disabled={counter == 1 ? true : false}>Previous Page</button>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          margin: "2rem 0",
+        }}
+      >
+        <button
+          onClick={() => prevPageHandler()}
+          disabled={counter == 1 ? true : false}
+        >
+          Previous Page
+        </button>
         <button onClick={() => nextPageHandler()}>Next Page</button>
       </div>
     </div>

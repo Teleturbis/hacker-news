@@ -99,6 +99,14 @@ a.article-url:hover {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
+span.highlight {
+  background-color: yellow;
+}
+
+.part {
+  border: 1px solid red;
+}
+
 .article-title-box {
   margin-bottom: 0.8rem;
 }

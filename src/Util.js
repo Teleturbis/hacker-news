@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default class Util {
   static toRelativeTimeStr(time) {
     const seconds = Math.floor(time / 1000);
@@ -16,5 +18,12 @@ export default class Util {
     if (minutes > 5)
       return `${minutes} ${minutes > 1 ? 'minutes' : 'minute'} ago`;
     return `just now`;
+  }
+
+  static addHighlightsToString(str, highlightText) {
+    const r = new RegExp(`(${highlightText})`, 'ig');
+    str = str.replaceAll(r, `<span class="highlight">$&</span>`);
+
+    return <span dangerouslySetInnerHTML={{ __html: str }}></span>;
   }
 }
