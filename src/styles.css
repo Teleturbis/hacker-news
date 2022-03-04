@@ -12,7 +12,7 @@
 
 html {
   font-size: 62.5%;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 body {
@@ -31,14 +31,11 @@ body {
 }
 
 .btn-user {
-  padding: 1.2rem;
-  color: var(--dark);
+  text-decoration: underline;
 }
 
-.btn-user:hover{
-
+.btn-user:hover {
   text-shadow: rgba(99, 99, 99, 1) 1px 2px 8px 0px;
-
 }
 
 .btn-close {
@@ -96,7 +93,7 @@ body {
   display: inline-block;
   font-size: 4.8rem;
   letter-spacing: 1.2px;
-  font-family: "Bebas Neue", sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 #headline i {
@@ -269,7 +266,7 @@ span.highlight {
 /* MODAL */
 
 .modal-container {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100vh;
   top: 0;
@@ -283,17 +280,44 @@ span.highlight {
 
 .modal-window {
   position: relative;
-  width: 32rem;
+  max-width: 64rem;
   height: fit-content;
   padding: 2rem;
 
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  
+  gap: 1.2rem;
+
+  word-wrap: break-word;
+
   font-size: 1.6rem;
   letter-spacing: 0.8px;
 
   background-color: var(--light);
   border-radius: 4px;
+}
+
+.author-about p {
+  opacity: 0.4;
+}
+
+.author-karma {
+  color: var(--dark);
+  text-align: center;
+  padding: 2rem;
+  border: 1px dashed var(--dark);
+  border-radius: 4px;
+}
+
+.author-name-box {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.author-avatar {
+  width: 6rem;
+  border-radius: 50%;
+  /* border: 2px solid #2d2c35; */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }

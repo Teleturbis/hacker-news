@@ -35,7 +35,7 @@ export default function CardItem({ article, searchTerm, fetchUserData }) {
         </li>
         <li className="card-badge">
           <i className="fa-solid fa-user"></i>
-          <span><a onClick={onClickAuthor}>{article.author}</a></span>
+          <span><a className="btn btn-user" onClick={onClickAuthor}>{article.author}</a></span>
         </li>
         <li className="card-badge">
           <i className="fa-solid fa-message"></i>
