@@ -61,11 +61,10 @@ export default function Filter({
     <div>
       <input
         type="text"
-        value={userInput} //  /ab+c/ &
+        value={userInput}
         placeholder="Suchen"
         onChange={(e) => {
           const str = e.target.value;
-          // console.log(str);
           return str.match(new RegExp(/^[A-Za-z0-9 \-&]*$/))
             ? setUserInput(str)
             : null;
