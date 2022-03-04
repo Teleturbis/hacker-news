@@ -165,8 +165,6 @@ function App() {
   function fetchUserData(name) {
     let url = `http://hn.algolia.com/api/v1/users/${name}`;
 
-    //setIsLoading(true);
-
     fetch(url)
       .then((response) => {
         return response.json();
